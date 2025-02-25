@@ -1,24 +1,29 @@
-name: All Builds (Linux, macOS, Windows, Android, IPA, APK, AAB)
+name: Windows Build
 
 on:
+  # Runs on push to any of the below branches
   push:
     branches:
       - master
       - main
+  # Runs on pull request events that target one of the below branches
   pull_request:
     branches:
       - master
       - main
+
+  # Allows you to run this workflow manually from the Actions tab of the repository
   workflow_dispatch:
 
 env:
+  # https://flet.dev/docs/publish#versioning
   BUILD_NUMBER: 1
   BUILD_VERSION: 1.0.0
   PYTHON_VERSION: 3.12.2
-  FLUTTER_VERSION: 3.27.4
+  FLUTTER_VERSION: 3.24.0
 
 jobs:
-  build-windows:
+  build:
     runs-on: windows-latest
 
     steps:
@@ -40,12 +45,6 @@ jobs:
       with:
         flutter-version: ${{ env.FLUTTER_VERSION }}
 
-    - name: Configure flet versioning in pyproject.toml
-      run: |
-        echo '[tool.flet]' >> pyproject.toml
-        echo 'build_number = $env:BUILD_NUMBER' >> pyproject.toml
-        echo 'build_version = "$env:BUILD_VERSION"' >> pyproject.toml
-
     - name: Flet Build Windows
       run: |
         flutter config --no-analytics
@@ -56,5 +55,6 @@ jobs:
       with:
         name: windows-build-artifact
         path: build/windows
-        if-no-files-found: warn
+        if-no-files-found: error
         overwrite: false
+
