@@ -159,10 +159,6 @@ def main(page: ft.Page):
         icon_color = '#000000',
         height=50)
     
-    print_button = ft.CupertinoFilledButton(
-        content=ft.Text("print",size=18,font_family='poppins'),
-        on_click=print,
-        )
     
     save_as_csv_button = ft.CupertinoFilledButton(
         content=ft.Text("Save As CSV",size=18,font_family='poppins'),
