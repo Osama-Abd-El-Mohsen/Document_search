@@ -1,2 +1,1 @@
-flet==0.22.*
-pandas
+flet==0.27.1
