@@ -101,8 +101,8 @@ def main(page: ft.Page):
             page.open(ft.SnackBar(ft.Text(f"search finished Found {len(title_list)} Item", color='#fcfffd'),bgcolor='#16181d'))
 
     drop_down_menu = ft.DropdownM2(
-            label="Color",
-            hint_text="Choose The Categoy",
+            label="Category",
+            hint_text="Choose The Category",
             options=[
                 ft.dropdownm2.Option('All'),  
                 *[ft.dropdownm2.Option(x) for x in unique_doc_type] 
