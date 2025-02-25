@@ -1,6 +1,6 @@
 import flet as ft
 import pandas as pd
-data = pd.read_csv('assets/01_edited.csv', usecols=['Document No.', 'Document Title','Doc.Type'])
+data = pd.read_csv('assets/01_edited.csv',encoding='utf-8', usecols=['Document No.', 'Document Title','Doc.Type'])
 
 unique_doc_type = data['Doc.Type'].unique()
 title_list = []
