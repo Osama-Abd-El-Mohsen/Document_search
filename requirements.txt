@@ -1,4 +1,4 @@
-let==0.25.2
+flet==0.25.2
 matplotlib
-numpy==2.1.1
+numpy==1.26.4
 pandas==2.2.2
