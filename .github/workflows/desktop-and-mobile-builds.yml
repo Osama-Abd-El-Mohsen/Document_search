@@ -19,8 +19,8 @@ env:
   # https://flet.dev/docs/publish#versioning
   BUILD_NUMBER: 1
   BUILD_VERSION: 1.0.0
-  PYTHON_VERSION: 3.12.2
-  FLUTTER_VERSION: 3.27.4
+  PYTHON_VERSION: 3.13.2
+  FLUTTER_VERSION: 3.24.0
 
 jobs:
   build:
@@ -57,4 +57,3 @@ jobs:
         path: build/windows
         if-no-files-found: error
         overwrite: false
-
