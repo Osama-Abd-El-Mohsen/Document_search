@@ -1,2 +1,4 @@
-flet==0.22.*
-pandas
+let==0.25.2
+matplotlib
+numpy==2.1.1
+pandas==2.2.2
