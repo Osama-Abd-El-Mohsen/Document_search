@@ -1,6 +1,6 @@
 import flet as ft
 import pandas as pd
-data = pd.read_csv('assets/01_edited.csv', encoding='cp1252', usecols=['Document No.', 'Document Title','Doc.Type'])
+data = pd.read_csv('assets/01_edited.csv',  usecols=['Document No.', 'Document Title','Doc.Type'])
 
 unique_doc_type = data['Doc.Type'].unique()
 title_list = []
@@ -100,6 +100,13 @@ def main(page: ft.Page):
             page.update()
             page.open(ft.SnackBar(ft.Text(f"search finished Found {len(title_list)} Item", color='#fcfffd'),bgcolor='#16181d'))
 
+    img = ft.Image(
+        src=f"assets/icon.png",
+        width=100,
+        height=100,
+        fit=ft.ImageFit.CONTAIN,
+    )
+
     drop_down_menu = ft.DropdownM2(
             label="Category",
             hint_text="Choose The Category",
@@ -170,7 +177,7 @@ def main(page: ft.Page):
 
     result_text = ft.Text(f'Found ــ Item',size = 16,font_family="poppins")
 
-    page.add(ft.Row([drop_down_menu,search_field, search_button,result_text]))
+    page.add(ft.Row([img,drop_down_menu,search_field, search_button,result_text]))
     page.add(table_container)
     page.add(ft.Row([save_as_csv_button,save_as_txt_button],alignment=ft.MainAxisAlignment.CENTER))
 
