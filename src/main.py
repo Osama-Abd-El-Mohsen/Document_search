@@ -16,15 +16,15 @@ def search(col, search_word: str,cat:str):
             title_list.append(str(col['Document Title']))
             no_list.append(str(col['Document No.']))
             cat_list.append(str(col['Doc.Type']))
-            TN_list.append(str(col['TN No.']))
             REV_list.append(str(col['Rev.']))
+            TN_list.append(str(col['TN No.']))
     elif cat == 'All':
         if search_word.strip().lower() in str(col['Document Title']).lower():
             title_list.append(str(col['Document Title']))
             no_list.append(str(col['Document No.']))
             cat_list.append(str(col['Doc.Type']))
-            TN_list.append(str(col['TN No.']))
             REV_list.append(str(col['Rev.']))
+            TN_list.append(str(col['TN No.']))
 
 
 def highlight_text(text, search_word):
@@ -56,14 +56,14 @@ def main(page: ft.Page):
     
     def save_as_CSV(args):
         try :
-            df = pd.DataFrame({'index':index_list,'category':cat_list,'Document Title': title_list,'Document No.': no_list,'TN No.':TN_list,'Rev.':REV_list})
+            df = pd.DataFrame({'index':index_list,'category':cat_list,'Document Title': title_list,'Document No.': no_list,'Rev.':REV_list,'TN No.':TN_list})
             df.to_csv('result.csv', index=False)
             page.open(ft.SnackBar(ft.Text(f"'result.csv' saved successfully", color='#fcfffd'),bgcolor='#16181d'))
         except : page.open(ft.SnackBar(ft.Text(f"Error saving file", color='#fcfffd'),bgcolor='#16181d'))
 
     def save_as_TXT(args):
         try:
-            df = pd.DataFrame({'index':index_list,'category':cat_list,'Document Title': title_list,'Document No.': no_list,'TN No.':TN_list,'Rev.':REV_list})
+            df = pd.DataFrame({'index':index_list,'category':cat_list,'Document Title': title_list,'Document No.': no_list,'Rev.':REV_list,'TN No.':TN_list})
             df.to_csv('result.txt', index=False)
             page.open(ft.SnackBar(ft.Text(f"'result.txt' saved successfully", color='#fcfffd'),bgcolor='#16181d'))
         except : page.open(ft.SnackBar(ft.Text(f"Error saving file", color='#fcfffd'),bgcolor='#16181d'))
@@ -97,8 +97,8 @@ def main(page: ft.Page):
                         ft.DataCell(ft.Text(str(cat_val))),
                         ft.DataCell(highlight_text(title, search_text)),  
                         ft.DataCell(ft.Text(str(no))),
-                        ft.DataCell(ft.Text(str(tn))),
                         ft.DataCell(ft.Text(str(rev))),
+                        ft.DataCell(ft.Text(str(tn))),
                     ],
                     # on_select_changed=on_select,
                 )
@@ -144,8 +144,8 @@ def main(page: ft.Page):
             ft.DataColumn(ft.Text("Categoy")),
             ft.DataColumn(ft.Text("Document Title")),
             ft.DataColumn(ft.Text("Document No.")),
-            ft.DataColumn(ft.Text("TN No")),
             ft.DataColumn(ft.Text("REV")),
+            ft.DataColumn(ft.Text("TN No")),
         ],
         rows=[],
         border_radius=20,
