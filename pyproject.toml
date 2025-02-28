@@ -1,11 +1,11 @@
 [project]
-name = "petrojet_search"
-version = "0.1.0"
+name = "Document_search"
+version = "0.1.1"
 description = ""
 readme = "README.md"
 requires-python = ">=3.9"
 authors = [
-    { name = "El Mohsen", email = "email@gmail.com" }
+    { name = "Osama Abd El Mohsen", email = "osama.m.abdelmohsen@gmail.com" }
 ]
 dependencies = [
     "flet>=0.27.1",

@@ -1,11 +1,13 @@
 import flet as ft
 import pandas as pd
-data = pd.read_csv('assets/01_edited.csv',encoding='utf-8', usecols=['Document No.', 'Document Title','Doc.Type'])
+data = pd.read_csv('assets/01_edited.csv',encoding='utf-8', usecols=['Document No.', 'Document Title','Doc.Type','TN No.','Rev.'])
 
 unique_doc_type = data['Doc.Type'].unique()
 title_list = []
 no_list = []
 cat_list = []
+TN_list = []
+REV_list = []
 
 
 def search(col, search_word: str,cat:str):
@@ -14,11 +16,15 @@ def search(col, search_word: str,cat:str):
             title_list.append(str(col['Document Title']))
             no_list.append(str(col['Document No.']))
             cat_list.append(str(col['Doc.Type']))
+            TN_list.append(str(col['TN No.']))
+            REV_list.append(str(col['Rev.']))
     elif cat == 'All':
         if search_word.strip().lower() in str(col['Document Title']).lower():
             title_list.append(str(col['Document Title']))
             no_list.append(str(col['Document No.']))
             cat_list.append(str(col['Doc.Type']))
+            TN_list.append(str(col['TN No.']))
+            REV_list.append(str(col['Rev.']))
 
 
 def highlight_text(text, search_word):
@@ -50,14 +56,14 @@ def main(page: ft.Page):
     
     def save_as_CSV(args):
         try :
-            df = pd.DataFrame({'index':index_list,'category':cat_list,'Document No.': no_list, 'Document Title': title_list})
+            df = pd.DataFrame({'index':index_list,'category':cat_list,'Document Title': title_list,'Document No.': no_list,'TN No.':TN_list,'Rev.':REV_list})
             df.to_csv('result.csv', index=False)
             page.open(ft.SnackBar(ft.Text(f"'result.csv' saved successfully", color='#fcfffd'),bgcolor='#16181d'))
         except : page.open(ft.SnackBar(ft.Text(f"Error saving file", color='#fcfffd'),bgcolor='#16181d'))
 
     def save_as_TXT(args):
         try:
-            df = pd.DataFrame({'index':index_list,'category':cat_list,'Document No.': no_list, 'Document Title': title_list})
+            df = pd.DataFrame({'index':index_list,'category':cat_list,'Document Title': title_list,'Document No.': no_list,'TN No.':TN_list,'Rev.':REV_list})
             df.to_csv('result.txt', index=False)
             page.open(ft.SnackBar(ft.Text(f"'result.txt' saved successfully", color='#fcfffd'),bgcolor='#16181d'))
         except : page.open(ft.SnackBar(ft.Text(f"Error saving file", color='#fcfffd'),bgcolor='#16181d'))
@@ -78,6 +84,8 @@ def main(page: ft.Page):
             title_list.clear()  
             no_list.clear()
             cat_list.clear()
+            TN_list.clear()
+            REV_list.clear()
             index_list.clear()
             data.apply(lambda row: search(row, search_text,drop_down_menu.value), axis=1)
             index_list.extend(range(1,len(title_list)+1))
@@ -87,12 +95,14 @@ def main(page: ft.Page):
                     cells=[
                         ft.DataCell(ft.Text(str(index))),
                         ft.DataCell(ft.Text(str(cat_val))),
-                        ft.DataCell(ft.Text(str(no))),
                         ft.DataCell(highlight_text(title, search_text)),  
+                        ft.DataCell(ft.Text(str(no))),
+                        ft.DataCell(ft.Text(str(tn))),
+                        ft.DataCell(ft.Text(str(rev))),
                     ],
                     # on_select_changed=on_select,
                 )
-                for index,cat_val, no, title in zip(index_list,cat_list, no_list, title_list)
+                for index,cat_val, no, title,tn,rev in zip(index_list,cat_list, no_list, title_list,TN_list,REV_list)
             ]
 
             table.rows = filtered_rows
@@ -132,8 +142,10 @@ def main(page: ft.Page):
         columns=[
             ft.DataColumn(ft.Text("Index"), numeric=True),
             ft.DataColumn(ft.Text("Categoy")),
-            ft.DataColumn(ft.Text("Document No.")),
             ft.DataColumn(ft.Text("Document Title")),
+            ft.DataColumn(ft.Text("Document No.")),
+            ft.DataColumn(ft.Text("TN No")),
+            ft.DataColumn(ft.Text("REV")),
         ],
         rows=[],
         border_radius=20,
