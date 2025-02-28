@@ -8,7 +8,7 @@ authors = [
     { name = "Osama Abd El Mohsen", email = "osama.m.abdelmohsen@gmail.com" }
 ]
 dependencies = [
-    "flet>=0.27.1",
+    "flet==0.27.1",
     "pandas>=2.2.2",
 ]
 
